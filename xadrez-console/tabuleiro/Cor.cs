@@ -1,4 +1,4 @@
-﻿namespace xadrez_console.tabuleiro
+﻿namespace tabuleiro
 {
     internal enum Cor
     {
