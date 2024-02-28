@@ -8,9 +8,21 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            PosicaoXadrez pos = new PosicaoXadrez('a', 1);
+            try
+            {
+                Tabuleiro tabuleiro = new Tabuleiro(8, 8);
 
-            Console.WriteLine(pos.ToPosicao());
+                tabuleiro.ColocarPeca(new Torre(tabuleiro, Cor.Azul), new Posicao(0, 0));
+                tabuleiro.ColocarPeca(new Torre(tabuleiro, Cor.Vermelha), new Posicao(1, 3));
+                tabuleiro.ColocarPeca(new Rei(tabuleiro, Cor.Vermelha), new Posicao(0, 2));
+                tabuleiro.ColocarPeca(new Rei(tabuleiro, Cor.Azul), new Posicao(3, 5));
+
+                Tela.ImprimirTabuleiro(tabuleiro);
+            }
+            catch (TabuleiroException tab)
+            {
+                Console.WriteLine(tab.Message);
+            }
 
             Console.ReadLine();
         }
