@@ -22,7 +22,6 @@ namespace xadrez_console.xadrez
         public void ExecutaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = tabuleiro.RetirarPeca(origem);
-            p.IncrementarQteMovimento(); 
             Peca pecaCapturada = tabuleiro.RetirarPeca(destino);
             tabuleiro.ColocarPeca(p, destino);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using tabuleiro;
 using xadrez;
 
@@ -15,17 +16,39 @@ namespace tabuleiro
                 Console.ResetColor();
                 for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    if (tabuleiro.Peca(i, j) == null)
+                    ImprimirPeca(tabuleiro.Peca(i, j));
+                }
+                Console.WriteLine();
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("  a b c d e f g h");
+            Console.ResetColor();
+
+        }
+
+        public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
+        {
+            for (int i = 0; i < tabuleiro.Linhas; i++)
+            {
+
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(8 - i + " ");
+                Console.ResetColor();
+                for (int j = 0; j < tabuleiro.Colunas; j++)
+                {
+                    if (posicoesPossiveis[i, j])
                     {
-                        Console.Write("- ");
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
                     }
                     else
                     {
-                        ImprimirPeca(tabuleiro.Peca(i, j));
-                        Console.Write(" ");
+                        Console.BackgroundColor = ConsoleColor.Black;
                     }
+                    ImprimirPeca(tabuleiro.Peca(i, j));
                 }
                 Console.WriteLine();
+                Console.ResetColor();  
             }
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("  a b c d e f g h");
@@ -37,23 +60,33 @@ namespace tabuleiro
         {
             string s = Console.ReadLine();
             char coluna = s[0];
-            int linha = int.Parse(s[1] + "");
+            int linha = int.Parse(s[1] + " ");
             return new PosicaoXadrez(coluna, linha);
         }
 
         public static void ImprimirPeca(Peca peca)
         {
-            if(peca.Cor == Cor.Azul)
+            if (peca == null)
             {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.Write(peca);
-                Console.ResetColor();
+                Console.Write("- ");
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write(peca);
-                Console.ResetColor();
+
+
+                if (peca.Cor == Cor.Azul)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(peca);
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(peca);
+                    Console.ResetColor();
+                }
+            Console.Write(" ");
             }
         }
     }
